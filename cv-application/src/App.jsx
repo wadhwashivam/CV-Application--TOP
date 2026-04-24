@@ -26,19 +26,32 @@ function App() {
     dateEnding: '',
   });
 
+  const [showResult, setShowResult] = useState(false);
+
+  function handleShowResult(){
+    setShowResult(true);
+  }
+
+  function handleEdit(){
+    setShowResult(false);
+  }
+
   return (
     <>
-     <PersonalInfo data = {personalInfo} setData = {setPersonalInfo}/>
-     <EducationInfo data = {educationInfo} setData = {setEducationInfo}/>
-     <ExperienceInfo data = {experienceInfo} setData = {setExperienceInfo}/>
-
-    <div className = "btnDiv">
-      <button className='mainBtn'>Edit</button>
-      <button className='mainBtn'>Submit</button>
-    </div>
-    <Resume personal = {personalInfo} education = {educationInfo} experience = {experienceInfo}/>
+    {showResult === false ? (
+      <>
+        <PersonalInfo data = {personalInfo} setData = {setPersonalInfo}/>
+        <EducationInfo data = {educationInfo} setData = {setEducationInfo}/>
+        <ExperienceInfo data = {experienceInfo} setData = {setExperienceInfo}/>
+        <button className='mainBtn' onClick={handleShowResult}>Submit</button>
+      </>
+    ): (
+      <>
+        <Resume personal = {personalInfo} education = {educationInfo} experience = {experienceInfo}/>
+        <button className='mainBtn' onClick={handleEdit}>Edit</button>
+      </>
+    )}
     </>
-  )
+)
 }
-
 export default App
